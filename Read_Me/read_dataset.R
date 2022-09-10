@@ -98,12 +98,18 @@ ggplot(sale_dataset) + geom_histogram(aes(log(SalePrice))) #achieve normal distr
 encoding<- as.data.frame(model.matrix(~Condition1-1, sale_dataset))
 sale_dataset<-cbind(sale_dataset,encoding)
 
+#-------------------------------------------------------------------------------------------------------------------------#
 
+#for this example: merge test and Sale Price per ID
+sale_test <- sale_test %>% left_join(sale, by="Id")
 
 #-------------------------------------------------------------------------------------------------------------------------#
 
 #save data set in working directory
-save(sale_dataset, file="sale_dataset.csv")
+
+write.csv(sale_dataset, file="~/Desktop/Price Index/house-prices-advanced-regression-techniques/sale_dataset.csv", row.names=FALSE)
+write.csv(sale_test, file="~/Desktop/Price Index/house-prices-advanced-regression-techniques/sale_test.csv", row.names=FALSE)
+
 
 
 
